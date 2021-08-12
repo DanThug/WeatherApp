@@ -49,9 +49,21 @@ const showCityWeather = async city => {
     showOrHideContainer();
 }
 
+const loadStorageCity = () => {
+    const cityName = localStorage.getItem('city');
+
+    if (cityName) {
+        showCityWeather(cityName);
+    }
+}
+
+loadStorageCity();
+
 cityForm.addEventListener('submit', event => {
     event.preventDefault();
+    const inputValue = event.target.city.value;
 
-    showCityWeather(event.target.city.value);
+    localStorage.setItem('city', inputValue);
+    showCityWeather(inputValue);
     event.target.reset();
 });
